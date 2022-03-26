@@ -7,6 +7,8 @@ d.addEventListener("DOMContentLoaded", function(event) {
 		document.getElementById("detailsButton").focus();
 	});
 
+	//Load the countries drop down
+	getAllCountries();
 });
 
 function getCountryDetails() {
@@ -20,7 +22,7 @@ function getCountryDetails() {
 
 	disbaleDetailsButton();
 
-	fetch('countries/'+countryName, {
+	fetch('countries/   ' + countryName, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -31,6 +33,44 @@ function getCountryDetails() {
 				response.json().then(response => {
 					if (response) {
 						showResultMessage(response);
+					}
+					else {
+						showErrorMessage(response.message);
+					}
+				});
+			}
+			else {
+				response.json().then(response => {
+					showErrorMessage(response.message);
+				});
+			}
+			enableDetailsButton();
+		})
+		.catch((error) => {
+			showErrorMessage('Error:' + error);
+			enableDetailsButton();
+		});
+}
+
+function getAllCountries() {
+
+	disbaleDetailsButton();
+
+	fetch('countries', {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	})
+		.then(response => {
+			if (response.ok) {
+				response.json().then(response => {
+					if (response) {
+						//$('#countryName').find('option').remove();
+						//$("#countryName").append('<option value="-1" selected="selected" disabled="disabled">Select country</option>');
+						$.each(response, function(key, value) {
+							$("#countryName").append('<option value="' + key + '">' + key + '(' +value +')</option>');
+						});
 					}
 					else {
 						showErrorMessage(response.message);

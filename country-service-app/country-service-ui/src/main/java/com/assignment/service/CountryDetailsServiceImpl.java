@@ -39,35 +39,18 @@ public class CountryDetailsServiceImpl implements CountryDetailsService {
     /**
      * Get name and code for all the countries
      *
-     * @return list of countries having country name and country code
+     * @return all the countries name and code. Key is the country name, value
+     *         is the country code.
      */
     @Override
     public Map<String, String> getAllCountries() {
 
-        System.out.println("countryServiceUrl = " + countryServiceUrl);
-        System.out.println("allCountriesUrl = " + allCountriesUrl);
-        System.out.println("countryDetailsByNameUrl = " + countryDetailsByNameUrl);
+        log.debug("getAllCountries() : allCountriesUrl = {}" + allCountriesUrl);
 
         final String uri = UriComponentsBuilder.fromUriString(allCountriesUrl).toUriString();
         log.debug("GetAllCountries uri = {}", uri);
 
-        //        final HttpEntity<String> entity = new HttpEntity<>("body", headers);
-        //        final CountryList allCountries = restTemplate.exchange(uri, HttpMethod.GET, entity, CountryList.class);
-
         final CountryList allCountries = restTemplate.getForObject(uri, CountryList.class);
-
-        //        try {
-        //
-        //            final HttpHeaders headers = new HttpHeaders();
-        //            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        //
-        //            final HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        //            final ResponseEntity<CountryList> response = restTemplate.exchange(uri, HttpMethod.GET, entity, CountryList.class);
-        //            System.out.println("Result - status (" + response.getStatusCode() + ") has body: " + response.hasBody());
-        //        }
-        //        catch (final Exception eek) {
-        //            System.out.println("** Exception: " + eek.getMessage());
-        //        }
 
         final Map<String, String> countriesMap = new TreeMap<String, String>();
         if ((null != allCountries) && (null != allCountries.getCountries()) && !allCountries.getCountries().isEmpty()) {
@@ -88,6 +71,8 @@ public class CountryDetailsServiceImpl implements CountryDetailsService {
      */
     @Override
     public CountryDetails getDetailsByCountryName(final String countryName) {
+
+        log.debug("getDetailsByCountryName() : countryDetailsByNameUrl = {}" + countryDetailsByNameUrl);
 
         final Map<String, String> urlParams = new HashMap<>();
         urlParams.put("countryName", countryName);

@@ -38,20 +38,60 @@ public class AppController {
      */
     @RequestMapping("/")
     public ModelAndView index() {
-
-        // final Map<String, String> allSupportedCurrencies = currencyConverter.getAllSupportedCurrencies();
-
-        final Map<String, String> countries = countryDetailsService.getAllCountries();
-
         final ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
-        modelAndView.addObject("countries", countries);
         return modelAndView;
     }
 
+    /**
+     * Get the Country details like name, country code, capital, population and
+     * flag image url
+     *
+     * @param name country name
+     * @return Country details. <br>
+     *         Example response format : <br>
+     *
+     *         <pre>
+     *         {
+     *         "name": "Finland",
+     *         "country_code": "FI",
+     *         "capital": [
+     *         "Helsinki"
+     *         ],
+     *         "population": 5530719,
+     *         "flag_file_url": "https://flagcdn.com/w320/fi.png"
+     *         }
+     *
+     *         <pre>
+     *
+     */
     @GetMapping("/countries/{name}")
     public CountryDetails getDetailsByCountryName(@PathVariable("name") final String name) {
         log.debug("Entered getDetailsByCountryName() : name = {}", name);
         return countryDetailsService.getDetailsByCountryName(name);
+    }
+
+    /**
+     * Get the country name and country code for all the countries.
+     *
+     * @param name country name
+     * @return Country details. <br>
+     *         Example response format : <br>
+     *
+     *         <pre>
+     *         {
+     *         ...
+     *         "Finland": "FI",
+     *         "France": "FR",
+     *         ...
+     *         }
+     *
+     *         <pre>
+     *
+     */
+    @GetMapping("/countries")
+    public Map<String, String> getAllCountries() {
+        log.debug("Entered getAllCountries().");
+        return countryDetailsService.getAllCountries();
     }
 }

@@ -9,7 +9,8 @@ public interface CountryDetailsService {
     /**
      * Get name and code for all the countries
      *
-     * @return all the countries name and code.
+     * @return all the countries name and code. Key is the country name, value
+     *         is the country code.
      */
 
     Map<String, String> getAllCountries();

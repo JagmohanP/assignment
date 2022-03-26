@@ -24,8 +24,8 @@
 				<div class="card p-2">
 					<div class="input-group">
 						<select class="form-select" id="countryName" required>
-							<option value="-1" selected="selected" disabled="disabled">Select
-								country</option>
+							<option value="-1" selected="selected" disabled="disabled">
+							------------------- Select country -------------------</option>
 							<c:forEach var="currency" items="${countries}">
 								<option value="${currency.key}">${currency.key}
 									(${currency.value})</option>
