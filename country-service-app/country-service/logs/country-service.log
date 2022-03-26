@@ -1,0 +1,5 @@
+2022-03-26 15:05:35.407  INFO 27820 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/country-service]         : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-26 15:05:35.408  INFO 27820 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-03-26 15:05:35.409  INFO 27820 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-03-26 15:05:35.452  INFO 27820 --- [http-nio-8080-exec-1] c.a.controller.CountryDetailsController  : Entered getDetailsByCountryName() : name = xyz
+2022-03-26 15:05:38.074  INFO 27820 --- [http-nio-8080-exec-3] c.a.controller.CountryDetailsController  : Entered getDetailsByCountryName() : name = Finland
