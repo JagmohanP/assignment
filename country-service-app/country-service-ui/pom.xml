@@ -25,6 +25,19 @@
 			<artifactId>country-service-shared</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<!-- Enable JSP -->
+		<!-- Tomcat Embed -->
+		<!-- JSTL -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<!-- To compile JSP files -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
