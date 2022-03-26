@@ -87,6 +87,6 @@ public class CountryDetailsController {
     @GetMapping("/countries/{name}")
     public CountryDetails getDetailsByCountryName(@PathVariable("name") final String name) {
         log.debug("Entered getDetailsByCountryName() : name = {}", name);
-        return countryDetailsService.getDetailsByCountryName(name);
+        return countryDetailsService.getDetailsByCountryName(name); 
     }
 }
