@@ -1,5 +1,7 @@
 package com.assignment.service;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,10 @@ public class CountryDetailsServiceImpl implements CountryDetailsService {
 
     @Override
     public CountryList getAllCountries() {
-        return countryDetailsProvider.getAllCountries();
+        final CountryList countryList = countryDetailsProvider.getAllCountries();
+        // Sort the list by country name.
+        Collections.sort(countryList.getCountries(), (c1, c2) -> c1.getName().compareTo(c2.getName()));
+        return countryList;
     }
 
     @Override
