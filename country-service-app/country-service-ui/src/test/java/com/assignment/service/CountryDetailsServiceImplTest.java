@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +28,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.assignment.dto.CountryDetails;
 import com.assignment.dto.CountryList;
+import com.assignment.util.TestUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @TestPropertySource(locations = "classpath:test-application.properties")
@@ -62,29 +62,12 @@ public class CountryDetailsServiceImplTest {
         this.mockServer = MockRestServiceServer.createServer(this.restTemplate);
     }
 
-    private static CountryList loadAllCountriesDataFromJson()
-            throws Exception {
-
-        final CountryList countries = mapper.readValue(
-                new ClassPathResource("all-countries.json").getFile(),
-                CountryList.class);
-        return countries;
-    }
-
-    private static CountryDetails loadCountryDataFromJson(final String countryName)
-            throws Exception {
-        final CountryDetails countryDetails = mapper.readValue(
-                new ClassPathResource(countryName).getFile(),
-                CountryDetails.class);
-        return countryDetails;
-    }
-
     @Test
     public void testAllSupportedCountries()
             throws Exception {
 
-        final CountryList allCountries = loadAllCountriesDataFromJson();
-        final CountryDetails finland = loadCountryDataFromJson("country-finland.json");
+        final CountryList allCountries = TestUtils.loadAllCountriesDataFromJson();
+        final CountryDetails finland = TestUtils.loadCountryDataFromJson(TestUtils.COUNTRY_FINLAND_JSON);
 
         final URI uri = UriComponentsBuilder.fromUriString(this.allCountriesUrl).build().toUri();
 
@@ -113,7 +96,7 @@ public class CountryDetailsServiceImplTest {
     @Test
     public void testgetDetailsByCountryName()
             throws Exception {
-        final CountryDetails finland = loadCountryDataFromJson("country-finland.json");
+        final CountryDetails finland = TestUtils.loadCountryDataFromJson(TestUtils.COUNTRY_FINLAND_JSON);
 
         final Map<String, String> urlParams = new HashMap<>();
         urlParams.put("countryName", "Finland");
@@ -144,7 +127,7 @@ public class CountryDetailsServiceImplTest {
     public void testgetDetailsByCountryName_name_with_spaces()
             throws Exception {
 
-        final CountryDetails southAfrica = loadCountryDataFromJson("country-south-africa.json");
+        final CountryDetails southAfrica = TestUtils.loadCountryDataFromJson(TestUtils.COUNTRY_SOUTH_AFRICA_JSON);
 
         final URI uri = UriComponentsBuilder.fromUriString(this.countryDetailsByNameUrl)
                 .buildAndExpand("South Africa")
@@ -171,7 +154,7 @@ public class CountryDetailsServiceImplTest {
     @Test
     public void testgetDetailsByCountryName_name_with_three_words()
             throws Exception {
-        final CountryDetails uae = loadCountryDataFromJson("country-uae.json");
+        final CountryDetails uae = TestUtils.loadCountryDataFromJson(TestUtils.COUNTRY_UAE_JSON);
 
         final URI uri = UriComponentsBuilder.fromUriString(this.countryDetailsByNameUrl)
                 .buildAndExpand("United Arab Emirates")
@@ -198,7 +181,7 @@ public class CountryDetailsServiceImplTest {
     @Test
     public void testgetDetailsByCountryName_with_multiple_capitals()
             throws Exception {
-        final CountryDetails southAfrica = loadCountryDataFromJson("country-south-africa.json");
+        final CountryDetails southAfrica = TestUtils.loadCountryDataFromJson(TestUtils.COUNTRY_SOUTH_AFRICA_JSON);
 
         final URI uri = UriComponentsBuilder.fromUriString(this.countryDetailsByNameUrl)
                 .buildAndExpand("South Africa")
@@ -222,7 +205,7 @@ public class CountryDetailsServiceImplTest {
     @Test
     public void testgetDetailsByCountryName_with_no_capital()
             throws Exception {
-        final CountryDetails antarctica = loadCountryDataFromJson("country-antarctica.json");
+        final CountryDetails antarctica = TestUtils.loadCountryDataFromJson(TestUtils.COUNTRY_ANTARCTICA_JSON);
         final URI uri = UriComponentsBuilder.fromUriString(this.countryDetailsByNameUrl)
                 .buildAndExpand("Antarctica")
                 .toUri();

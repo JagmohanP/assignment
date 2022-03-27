@@ -20,11 +20,9 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.client.RestTemplate;
 
 import com.assignment.controller.AppController;
 import com.assignment.dto.CountryDetails;
@@ -33,6 +31,7 @@ import com.assignment.exception.APIExceptionHandler;
 import com.assignment.exception.ErrorCodes;
 import com.assignment.exception.NotFoundException;
 import com.assignment.service.CountryDetailsService;
+import com.assignment.util.TestUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -45,14 +44,10 @@ class CountryServiceUIApplicationTests {
     private int port;
 
     private static final String HOST = "http://localhost:";
-    private static final String ALL_COUNTRIES = "/country-service-ui/countries";
-    private static final String COUNTRY_DETAILS_BY_NAME = "/country-service-ui/countries/";
+    private static final String COUNTRIES_URL = "/country-service-ui/countries/";
 
     @Autowired
     private TestRestTemplate testRestTemplate;
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     @Autowired
     private MockMvc mockMvc;
@@ -64,23 +59,6 @@ class CountryServiceUIApplicationTests {
     private CountryDetailsService countryDetailsService;
 
     private static final ObjectMapper mapper = new ObjectMapper();
-
-    private static CountryList loadAllCountriesDataFromJson()
-            throws Exception {
-
-        final CountryList countries = mapper.readValue(
-                new ClassPathResource("all-countries.json").getFile(),
-                CountryList.class);
-        return countries;
-    }
-
-    private static CountryDetails loadCountryDataFromJson(final String countryName)
-            throws Exception {
-        final CountryDetails countryDetails = mapper.readValue(
-                new ClassPathResource(countryName).getFile(),
-                CountryDetails.class);
-        return countryDetails;
-    }
 
     @Test
     public void testIndexPage()
@@ -101,9 +79,9 @@ class CountryServiceUIApplicationTests {
     @Test
     public void testGetAllCountries()
             throws Exception {
-        final String uri = HOST + this.port + ALL_COUNTRIES;
+        final String uri = HOST + this.port + COUNTRIES_URL;
 
-        final CountryList allCountries = loadAllCountriesDataFromJson();
+        final CountryList allCountries = TestUtils.loadAllCountriesDataFromJson();
 
         final Map<String, String> countriesMap = allCountries.getCountries().stream().collect(
                 Collectors.toMap(CountryDetails::getName, CountryDetails::getCountryCode));
@@ -125,9 +103,9 @@ class CountryServiceUIApplicationTests {
     @Test
     public void testGetDetailsByCountryName()
             throws Exception {
-        final String uri = HOST + this.port + COUNTRY_DETAILS_BY_NAME + "Finland";
+        final String uri = HOST + this.port + COUNTRIES_URL + "Finland";
 
-        final CountryDetails finland = loadCountryDataFromJson("country-finland.json");
+        final CountryDetails finland = TestUtils.loadCountryDataFromJson(TestUtils.COUNTRY_FINLAND_JSON);
 
         Mockito.when(this.countryDetailsService.getDetailsByCountryName(anyString()))
                 .thenReturn(finland);
@@ -150,7 +128,7 @@ class CountryServiceUIApplicationTests {
         Mockito.when(this.countryDetailsService.getDetailsByCountryName(anyString()))
                 .thenThrow(new NotFoundException(ErrorCodes.NotFound));
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get(COUNTRY_DETAILS_BY_NAME + "SomeCountry"))
+        this.mockMvc.perform(MockMvcRequestBuilders.get(COUNTRIES_URL + "SomeCountry"))
                 //.andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
