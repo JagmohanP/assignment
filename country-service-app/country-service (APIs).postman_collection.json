@@ -103,6 +103,60 @@
 					"response": []
 				},
 				{
+					"name": "/name/United Arab Emirates?fields=name,cca2,capital,population,flags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restcountries.com/v3.1/name/United Arab Emirates?fields=name,cca2,capital,population,flags",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"com"
+							],
+							"path": [
+								"v3.1",
+								"name",
+								"United Arab Emirates"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "name,cca2,capital,population,flags"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/name/South Africa?fields=name,cca2,capital,population,flags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restcountries.com/v3.1/name/South Africa?fields=name,cca2,capital,population,flags",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"com"
+							],
+							"path": [
+								"v3.1",
+								"name",
+								"South Africa"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "name,cca2,capital,population,flags"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "/name/india",
 					"request": {
 						"method": "GET",
@@ -118,6 +172,33 @@
 								"v3.1",
 								"name",
 								"india"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/name/Antarctica?fields=name,cca2,capital,population,flags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restcountries.com/v3.1/name/Antarctica?fields=name,cca2,capital,population,flags",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"com"
+							],
+							"path": [
+								"v3.1",
+								"name",
+								"Antarctica"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "name,cca2,capital,population,flags"
+								}
 							]
 						}
 					},
@@ -525,6 +606,27 @@
 						"country-service",
 						"countries",
 						"India"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries/Antarctica",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries/Antarctica",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries",
+						"Antarctica"
 					]
 				}
 			},
