@@ -21,15 +21,17 @@ public class CountryDetailsServiceImpl implements CountryDetailsService {
 
     @Override
     public CountryList getAllCountries() {
-        final CountryList countryList = countryDetailsProvider.getAllCountries();
-        // Sort the list by country name.
-        Collections.sort(countryList.getCountries(), (c1, c2) -> c1.getName().compareTo(c2.getName()));
+        final CountryList countryList = this.countryDetailsProvider.getAllCountries();
+        if (null != countryList) {
+            // Sort the list by country name.
+            Collections.sort(countryList.getCountries(), (c1, c2) -> c1.getName().compareTo(c2.getName()));
+        }
         return countryList;
     }
 
     @Override
     public CountryDetails getDetailsByCountryName(final String countryName) {
-        return countryDetailsProvider.getDetailsByCountryName(countryName);
+        return this.countryDetailsProvider.getDetailsByCountryName(countryName);
     }
 
 }

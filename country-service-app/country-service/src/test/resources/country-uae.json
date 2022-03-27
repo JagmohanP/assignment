@@ -1,0 +1,23 @@
+[
+    {
+        "flags": {
+            "png": "https://flagcdn.com/w320/ae.png",
+            "svg": "https://flagcdn.com/ae.svg"
+        },
+        "name": {
+            "common": "United Arab Emirates",
+            "official": "United Arab Emirates",
+            "nativeName": {
+                "ara": {
+                    "official": "الإمارات العربية المتحدة",
+                    "common": "دولة الإمارات العربية المتحدة"
+                }
+            }
+        },
+        "cca2": "AE",
+        "capital": [
+            "Abu Dhabi"
+        ],
+        "population": 9890400
+    }
+]

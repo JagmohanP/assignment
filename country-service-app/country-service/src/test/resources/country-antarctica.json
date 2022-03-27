@@ -1,0 +1,16 @@
+[
+    {
+        "flags": {
+            "png": "https://flagcdn.com/w320/aq.png",
+            "svg": "https://flagcdn.com/aq.svg"
+        },
+        "name": {
+            "common": "Antarctica",
+            "official": "Antarctica",
+            "nativeName": {}
+        },
+        "cca2": "AQ",
+        "capital": [],
+        "population": 1000
+    }
+]
