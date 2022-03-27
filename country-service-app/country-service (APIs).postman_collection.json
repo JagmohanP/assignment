@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c64bab4a-e14b-42df-864b-12d34997e07e",
+		"_postman_id": "7687472d-37bd-4804-8dd8-488685ada31e",
 		"name": "country-service (APIs)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -351,6 +351,32 @@
 								"country-service",
 								"actuator",
 								"heapdump"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OpenAPI",
+			"item": [
+				{
+					"name": "/v3/api-docs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/country-service/v3/api-docs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country-service",
+								"v3",
+								"api-docs"
 							]
 						}
 					},
