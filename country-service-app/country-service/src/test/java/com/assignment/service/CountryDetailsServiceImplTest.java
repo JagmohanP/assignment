@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.TestPropertySource;
@@ -33,12 +33,11 @@ public class CountryDetailsServiceImplTest {
     // Service under test
     private CountryDetailsService countryDetailsService;
 
-    // Mock
+    @Mock
     private CountryDetailsProvider countryDetailsProvider;
 
     @BeforeEach
     void setUp() {
-        this.countryDetailsProvider = Mockito.mock(CountryDetailsProvider.class);
         this.countryDetailsService = new CountryDetailsServiceImpl(this.countryDetailsProvider);
     }
 
@@ -171,6 +170,13 @@ public class CountryDetailsServiceImplTest {
 
         final CountryDetails countryDetails = this.countryDetailsService.getDetailsByCountryName("Antarctica");
         assertNotNull(countryDetails);
-        assertTrue(0 == countryDetails.getCapital().size());
+        assertEquals(0, countryDetails.getCapital().size());
+    }
+
+    @Test
+    public void testgetDetailsByCountryName_with_invalid_name()
+            throws Exception {
+        final CountryDetails countryDetails = this.countryDetailsService.getDetailsByCountryName("SomeCountry");
+        assertNull(countryDetails);
     }
 }

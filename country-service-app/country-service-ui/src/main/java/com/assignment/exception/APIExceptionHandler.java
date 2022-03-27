@@ -1,5 +1,7 @@
 package com.assignment.exception;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -20,6 +22,8 @@ import com.assignment.dto.APIResponse;
 @ControllerAdvice
 public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 
+    private static final Logger log = LoggerFactory.getLogger(APIExceptionHandler.class);
+
     private final MessageSource messageSource;
 
     @Autowired
@@ -29,7 +33,7 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(InvalidInputException.class)
     public final ResponseEntity<APIResponse> handleInvalidInputException(final InvalidInputException ex, final WebRequest request) {
-
+        log.error("Invalid input exception.", ex);
         final String msg = this.getLocalizedMessage(ex.getMessageKey(), ex.getMessageArgs());
 
         final APIResponse response = new APIResponse(false, msg);
@@ -38,26 +42,16 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public final ResponseEntity<APIResponse> handleNotFoundException(final NotFoundException ex, final WebRequest request) {
-
+        log.error("Resource not found.", ex);
         final String msg = this.getLocalizedMessage(ex.getMessageKey(), ex.getMessageArgs());
 
         final APIResponse response = new APIResponse(false, msg);
         return new ResponseEntity<APIResponse>(response, HttpStatus.NOT_FOUND);
     }
 
-    //    @ExceptionHandler(HttpClientErrorException.class)
-    //    public final ResponseEntity<APIResponse> handleHttpClientErrorException(
-    //            final HttpClientErrorException ex,
-    //            final WebRequest request) {
-    //
-    //        final String msg = ex.getMessage();
-    //
-    //        final APIResponse response = new APIResponse(false, msg);
-    //        return new ResponseEntity<APIResponse>(response, HttpStatus.BAD_REQUEST);
-    //    }
-
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<APIResponse> handleAllGenericException(final Exception ex, final WebRequest request) {
+        log.error("Application exception.", ex);
         final APIResponse response = new APIResponse(false, "Unable to process the request. Please try after sometime.");
         return new ResponseEntity<APIResponse>(response, HttpStatus.BAD_REQUEST);
     }
@@ -68,6 +62,6 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
      * application supports it.
      */
     private String getLocalizedMessage(final String messageKey, final Object[] args) {
-        return messageSource.getMessage(messageKey, args, LocaleContextHolder.getLocale());
+        return this.messageSource.getMessage(messageKey, args, LocaleContextHolder.getLocale());
     }
 }

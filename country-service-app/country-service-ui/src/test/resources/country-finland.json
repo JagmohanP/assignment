@@ -1,0 +1,9 @@
+{
+    "name": "Finland",
+    "country_code": "FI",
+    "capital": [
+        "Helsinki"
+    ],
+    "population": 5530719,
+    "flag_file_url": "https://flagcdn.com/w320/fi.png"
+}

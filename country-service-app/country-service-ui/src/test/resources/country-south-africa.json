@@ -1,0 +1,11 @@
+{
+    "name": "South Africa",
+    "country_code": "ZA",
+    "capital": [
+        "Pretoria",
+        "Bloemfontein",
+        "Cape Town"
+    ],
+    "population": 59308690,
+    "flag_file_url": "https://flagcdn.com/w320/za.png"
+}
