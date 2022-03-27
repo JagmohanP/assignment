@@ -1,0 +1,571 @@
+{
+	"info": {
+		"_postman_id": "c64bab4a-e14b-42df-864b-12d34997e07e",
+		"name": "country-service (APIs)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "restcountries.com",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restcountries.com/v3.1/all",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"com"
+							],
+							"path": [
+								"v3.1",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all?fields=name,cca2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restcountries.com/v3.1/all?fields=name,cca2",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"com"
+							],
+							"path": [
+								"v3.1",
+								"all"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "name,cca2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/name/finland",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restcountries.com/v3.1/name/finland",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"com"
+							],
+							"path": [
+								"v3.1",
+								"name",
+								"finland"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/name/finland?fields=name,cca2,capital,population,flags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restcountries.com/v3.1/name/finland?fields=name,cca2,capital,population,flags",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"com"
+							],
+							"path": [
+								"v3.1",
+								"name",
+								"finland"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "name,cca2,capital,population,flags"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/name/india",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restcountries.com/v3.1/name/india",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"com"
+							],
+							"path": [
+								"v3.1",
+								"name",
+								"india"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/name/india?fields=name,cca2,capital,population,flags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restcountries.com/v3.1/name/india?fields=name,cca2,capital,population,flags",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"com"
+							],
+							"path": [
+								"v3.1",
+								"name",
+								"india"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "name,cca2,capital,population,flags"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/name/xyz [Invalid country name]",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://restcountries.com/v3.1/name/xyz",
+							"protocol": "https",
+							"host": [
+								"restcountries",
+								"com"
+							],
+							"path": [
+								"v3.1",
+								"name",
+								"xyz"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "content-negotiation",
+			"item": [
+				{
+					"name": "countries?mediaType=json",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/country-service/countries?mediaType=json",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country-service",
+								"countries"
+							],
+							"query": [
+								{
+									"key": "mediaType",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countries?mediaType=xml",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/country-service/countries?mediaType=xml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country-service",
+								"countries"
+							],
+							"query": [
+								{
+									"key": "mediaType",
+									"value": "xml"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "actuator",
+			"item": [
+				{
+					"name": "/actuator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/country-service/actuator",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country-service",
+								"actuator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actuator/health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/country-service/actuator/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country-service",
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actuator/httptrace",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/country-service/actuator/httptrace",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country-service",
+								"actuator",
+								"httptrace"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actuator/env",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/country-service/actuator/env",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country-service",
+								"actuator",
+								"env"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actuator/heapdump [Try directly on browser instead of Postman]",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/octet-stream",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/country-service/actuator/heapdump",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"country-service",
+								"actuator",
+								"heapdump"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "countries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries/Finland",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries/Finland",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries",
+						"Finland"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries/FINLAND [Upper case name]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries/FINLAND",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries",
+						"FINLAND"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries/FINLAND [Lower case name]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries/finland",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries",
+						"finland"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries/United Kingdom [Name having 2 words]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries/United Kingdom",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries",
+						"United Kingdom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries/United Arab Emirates [Name having 3 words]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries/United Arab Emirates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries",
+						"United Arab Emirates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries/India",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries/India",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries",
+						"India"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries/South Africa [3 capitals]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries/South Africa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries",
+						"South Africa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries/Antarctica [No capital]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries/Antarctica",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries",
+						"Antarctica"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries/xyz [Invalid country name]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/country-service/countries/xyz",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"country-service",
+						"countries",
+						"xyz"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
