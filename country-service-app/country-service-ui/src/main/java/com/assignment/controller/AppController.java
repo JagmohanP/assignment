@@ -68,7 +68,7 @@ public class AppController {
     @GetMapping("/countries/{name}")
     public CountryDetails getDetailsByCountryName(@PathVariable("name") final String name) {
         log.debug("Entered getDetailsByCountryName() : name = {}", name);
-        return countryDetailsService.getDetailsByCountryName(name);
+        return this.countryDetailsService.getDetailsByCountryName(name);
     }
 
     /**
@@ -92,6 +92,6 @@ public class AppController {
     @GetMapping("/countries")
     public Map<String, String> getAllCountries() {
         log.debug("Entered getAllCountries().");
-        return countryDetailsService.getAllCountries();
+        return this.countryDetailsService.getAllCountries();
     }
 }

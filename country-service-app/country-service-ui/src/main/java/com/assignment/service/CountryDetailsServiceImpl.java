@@ -14,6 +14,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.assignment.dto.CountryDetails;
 import com.assignment.dto.CountryList;
+import com.assignment.exception.ErrorCodes;
+import com.assignment.exception.InvalidInputException;
 
 @Service
 public class CountryDetailsServiceImpl implements CountryDetailsService {
@@ -45,12 +47,12 @@ public class CountryDetailsServiceImpl implements CountryDetailsService {
     @Override
     public Map<String, String> getAllCountries() {
 
-        log.debug("getAllCountries() : allCountriesUrl = {}" + allCountriesUrl);
+        log.debug("getAllCountries() : allCountriesUrl = {}" + this.allCountriesUrl);
 
-        final String uri = UriComponentsBuilder.fromUriString(allCountriesUrl).toUriString();
+        final String uri = UriComponentsBuilder.fromUriString(this.allCountriesUrl).toUriString();
         log.debug("GetAllCountries uri = {}", uri);
 
-        final CountryList allCountries = restTemplate.getForObject(uri, CountryList.class);
+        final CountryList allCountries = this.restTemplate.getForObject(uri, CountryList.class);
 
         final Map<String, String> countriesMap = new TreeMap<String, String>();
         if ((null != allCountries) && (null != allCountries.getCountries()) && !allCountries.getCountries().isEmpty()) {
@@ -72,18 +74,20 @@ public class CountryDetailsServiceImpl implements CountryDetailsService {
     @Override
     public CountryDetails getDetailsByCountryName(final String countryName) {
 
-        log.debug("getDetailsByCountryName() : countryDetailsByNameUrl = {}" + countryDetailsByNameUrl);
-
+        log.debug("getDetailsByCountryName() : countryDetailsByNameUrl = {}" + this.countryDetailsByNameUrl);
+        if ((null == countryName) || countryName.isEmpty()) {
+            throw new InvalidInputException(ErrorCodes.InvalidInputData);
+        }
         final Map<String, String> urlParams = new HashMap<>();
         urlParams.put("countryName", countryName);
 
-        final String uri = UriComponentsBuilder.fromUriString(countryDetailsByNameUrl)
+        final String uri = UriComponentsBuilder.fromUriString(this.countryDetailsByNameUrl)
                 .buildAndExpand(urlParams)
                 .toUriString();
 
         log.debug("GetDetailsByCountryName uri = {}", uri);
 
-        final CountryDetails countryDetails = restTemplate.getForObject(uri, CountryDetails.class);
+        final CountryDetails countryDetails = this.restTemplate.getForObject(uri, CountryDetails.class);
         return countryDetails;
     }
 
