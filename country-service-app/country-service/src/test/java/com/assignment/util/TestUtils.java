@@ -66,26 +66,27 @@ public class TestUtils {
         return null;
     }
 
-    public static CountryDetails toCountryDetails(final String countryName)
+    public static List<CountryDetails> toCountryDetailsList(final String countryName)
             throws Exception {
         final Country[] countryArr = toCountryArray(countryName);
 
         final List<CountryDetails> countries = Arrays.stream(countryArr)
                 .map(c -> new CountryDetails(c.getName(), c.getCountryCode(), c.getCapital(), c.getPopulation(), c.getFlag()))
                 .collect(Collectors.toList());
+        return countries;
+    }
+
+    public static CountryDetails toCountryDetails(final String countryName)
+            throws Exception {
+
+        final List<CountryDetails> countries = toCountryDetailsList(countryName);
         return countries.size() > 0 ? countries.get(0) : null;
     }
 
     public static CountryList toCountryList(final String countryName)
             throws Exception {
 
-        final Country[] countryArr = toCountryArray(countryName);
-
-        final List<CountryDetails> countries = Arrays.stream(countryArr)
-                .map(c -> new CountryDetails(c.getName(), c.getCountryCode(), c.getCapital(), c.getPopulation(), c.getFlag()))
-                .collect(Collectors.toList());
-
-        final CountryList countryList = new CountryList(countries);
-        return countryList;
+        final List<CountryDetails> countries = toCountryDetailsList(countryName);
+        return new CountryList(countries);
     }
 }

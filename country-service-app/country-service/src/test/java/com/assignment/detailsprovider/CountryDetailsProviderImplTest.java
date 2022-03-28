@@ -28,7 +28,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.assignment.dto.CountryDetails;
 import com.assignment.dto.CountryList;
 import com.assignment.util.TestUtils;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @TestPropertySource(locations = "classpath:test-application.properties")
 @SpringBootTest
@@ -48,8 +47,6 @@ public class CountryDetailsProviderImplTest {
     private RestTemplate restTemplate;
 
     private MockRestServiceServer mockServer;
-
-    private static final ObjectMapper mapper = new ObjectMapper();
 
     @BeforeEach
     void setUp() {

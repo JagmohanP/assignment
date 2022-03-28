@@ -8,23 +8,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.TestPropertySource;
 
-import com.assignment.detailsprovider.Country;
 import com.assignment.detailsprovider.CountryDetailsProvider;
 import com.assignment.dto.CountryDetails;
 import com.assignment.dto.CountryList;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.assignment.util.TestUtils;
 
 @TestPropertySource(locations = "classpath:test-application.properties")
 @SpringBootTest
@@ -41,39 +36,12 @@ public class CountryDetailsServiceImplTest {
         this.countryDetailsService = new CountryDetailsServiceImpl(this.countryDetailsProvider);
     }
 
-    private static CountryList loadAllCountriesDataFromJson()
-            throws Exception {
-
-        final List<CountryDetails> countries = parseCountriesDataFromJson("all-countries.json");
-        return new CountryList(countries);
-    }
-
-    private static CountryDetails loadCountryDataFromJson(final String countryName)
-            throws Exception {
-        final List<CountryDetails> countries = parseCountriesDataFromJson(countryName);
-        return countries.get(0);
-    }
-
-    private static List<CountryDetails> parseCountriesDataFromJson(final String countryName)
-            throws Exception {
-
-        final Country[] countryArr = new ObjectMapper().readValue(
-                new ClassPathResource(countryName).getFile(),
-                Country[].class);
-
-        final List<CountryDetails> countries = Arrays.stream(countryArr)
-                .map(c -> new CountryDetails(c.getName(), c.getCountryCode(), c.getCapital(), c.getPopulation(), c.getFlag()))
-                .collect(Collectors.toList());
-
-        return countries;
-    }
-
     @Test
-    public void testAllSupportedCountries()
+    public void testGetAllCountries()
             throws Exception {
 
-        final CountryList allCountries = loadAllCountriesDataFromJson();
-        final CountryDetails finland = loadCountryDataFromJson("country-finland.json");
+        final CountryList allCountries = TestUtils.toCountryList(TestUtils.ALL_COUNTRIES_JSON);
+        final CountryDetails finland = TestUtils.toCountryDetails(TestUtils.COUNTRY_FINLAND_JSON);
 
         when(this.countryDetailsProvider.getAllCountries()).thenReturn(allCountries);
 
@@ -104,7 +72,7 @@ public class CountryDetailsServiceImplTest {
     @Test
     public void testgetDetailsByCountryName()
             throws Exception {
-        final CountryDetails finland = loadCountryDataFromJson("country-finland.json");
+        final CountryDetails finland = TestUtils.toCountryDetails(TestUtils.COUNTRY_FINLAND_JSON);
         when(this.countryDetailsProvider.getDetailsByCountryName(anyString())).thenReturn(finland);
 
         final CountryDetails countryDetails = this.countryDetailsService.getDetailsByCountryName("Finland");
@@ -121,7 +89,8 @@ public class CountryDetailsServiceImplTest {
     public void testgetDetailsByCountryName_name_with_spaces()
             throws Exception {
 
-        final CountryDetails southAfrica = loadCountryDataFromJson("country-south-africa.json");
+        final CountryDetails southAfrica = TestUtils.toCountryDetails(TestUtils.COUNTRY_SOUTH_AFRICA_JSON);
+
         when(this.countryDetailsProvider.getDetailsByCountryName(anyString())).thenReturn(southAfrica);
 
         final CountryDetails countryDetails = this.countryDetailsService.getDetailsByCountryName("South Africa");
@@ -137,7 +106,7 @@ public class CountryDetailsServiceImplTest {
     @Test
     public void testgetDetailsByCountryName_name_with_three_words()
             throws Exception {
-        final CountryDetails uae = loadCountryDataFromJson("country-uae.json");
+        final CountryDetails uae = TestUtils.toCountryDetails(TestUtils.COUNTRY_UAE_JSON);
         when(this.countryDetailsProvider.getDetailsByCountryName(anyString())).thenReturn(uae);
 
         final CountryDetails countryDetails = this.countryDetailsService.getDetailsByCountryName("United Arab Emirates");
@@ -153,7 +122,7 @@ public class CountryDetailsServiceImplTest {
     @Test
     public void testgetDetailsByCountryName_with_multiple_capitals()
             throws Exception {
-        final CountryDetails southAfrica = loadCountryDataFromJson("country-south-africa.json");
+        final CountryDetails southAfrica = TestUtils.toCountryDetails(TestUtils.COUNTRY_SOUTH_AFRICA_JSON);
         when(this.countryDetailsProvider.getDetailsByCountryName(anyString())).thenReturn(southAfrica);
 
         final CountryDetails countryDetails = this.countryDetailsService.getDetailsByCountryName("South Africa");
@@ -166,7 +135,7 @@ public class CountryDetailsServiceImplTest {
     @Test
     public void testgetDetailsByCountryName_with_no_capital()
             throws Exception {
-        final CountryDetails antarctica = loadCountryDataFromJson("country-antarctica.json");
+        final CountryDetails antarctica = TestUtils.toCountryDetails(TestUtils.COUNTRY_ANTARCTICA_JSON);
         when(this.countryDetailsProvider.getDetailsByCountryName(anyString())).thenReturn(antarctica);
 
         final CountryDetails countryDetails = this.countryDetailsService.getDetailsByCountryName("Antarctica");
