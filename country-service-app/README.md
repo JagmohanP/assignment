@@ -1,4 +1,4 @@
-# country-service
+# country-service-app
 
 Project having API calls to get country specific details like country name, country code, capital, population etc.
 
@@ -149,11 +149,11 @@ curl -s --location --request GET 'http://localhost:8080/country-service/countrie
 With country-service running on default 8080 port, Swagger UI can be accessed at http://localhost:8080/country-service/swagger-ui/index.html
 
 ## Application monitoring
-country-service application exposes some actuator endpoints  to monitor the application status.
+country-service application exposes some actuator endpoints  to monitor the application status. It can be accessed at
 
 `http://<host>:<port>/country-service/actuator/`
 
-With country-service running on default 8080 port, below is a set of end points to monitor application.
+With country-service running on default 8080 port, below is a set of actuator endpoints.
 
 | ID        | URL                                                      | Details                                                         |
 |-----------|----------------------------------------------------------|-----------------------------------------------------------------|
@@ -164,8 +164,4 @@ With country-service running on default 8080 port, below is a set of end points 
 | httptrace | http://localhost:8080/country-service/actuator/httptrace | Displays HTTP trace information for request-response exchanges. |
 
 ## TODO feature list
-
-- Expose POST/DELETE/PUT REST APIs for customer, product and discount.
-- Extend UI to have more behaviour for easy testing.
-- Add more unit and integration tests.
-- Add more validation scenarios.
+- Use reactor-core
