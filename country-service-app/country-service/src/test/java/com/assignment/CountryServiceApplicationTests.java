@@ -71,7 +71,7 @@ public class CountryServiceApplicationTests {
             throws Exception {
         final String uri = HOST + this.port + COUNTRIES_URL;
 
-        final CountryList allCountries = TestUtils.loadAllCountriesDataFromJson();
+        final CountryList allCountries = TestUtils.toCountryList(TestUtils.ALL_COUNTRIES_JSON);
 
         Mockito.when(this.countryDetailsService.getAllCountries())
                 .thenReturn(allCountries);
@@ -93,7 +93,7 @@ public class CountryServiceApplicationTests {
             throws Exception {
         final String uri = HOST + this.port + COUNTRIES_URL + "Finland";
 
-        final CountryDetails finland = TestUtils.loadCountryDataFromJson(TestUtils.COUNTRY_FINLAND_JSON);
+        final CountryDetails finland = TestUtils.toCountryDetails(TestUtils.COUNTRY_FINLAND_JSON);
 
         Mockito.when(this.countryDetailsService.getDetailsByCountryName(anyString()))
                 .thenReturn(finland);

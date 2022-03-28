@@ -80,6 +80,7 @@ public class CountryDetailsServiceImplTest {
         final CountryList countryList = this.countryDetailsService.getAllCountries();
 
         assertNotNull(countryList);
+        assertNotNull(countryList.getCountries());
         assertFalse(countryList.getCountries().isEmpty());
 
         final Optional<CountryDetails> finlandDetails = countryList.getCountries().stream()
