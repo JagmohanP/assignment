@@ -121,15 +121,33 @@ Below is a partial output of the response.
 
 ## Testing the REST APIs
 
-* #### Test using Postman client:
- Postman is a very handy tool to test the REST APIs. Import the API collections which has many predefined API calls 
- covering many valid and invalid scenarios.
+* #### UI application:
+country-service-ui application provides a very simple and intuitive UI to consume the REST APIs.
+With default 8081 port, UI can be accessed at http://localhost:8081/country-service-ui/
 
-1. Import the Collection v2.1 API to postman. `country-service (APIs).postman_collection.json` (Postman Collection v2.1) 
-is available in the `country-service-app` directory.
+<details>
+  <summary>Example : Country service UI</summary>
+ 
+   ![Country service UI](country-service-ui.png "Country service UI")
+</details>
+
+
+* #### Postman client:
+Postman is a very handy tool to test the REST APIs. Import the API collections which has many predefined API calls
+covering many valid and invalid scenarios.
+
+1. Import the Collection v2.1 API to postman. `country-service (APIs).postman_collection.json` (Postman Collection v2.1)
+   is available in the `country-service-app` directory.
 2. Once imported, all the available set of API calls can be used to test the REST endpoint.
 
-* #### Test using curl command:
+<details>
+  <summary>Example : Postman rest client</summary>
+
+![Postman rest client](country-service-postman-client.PNG "Postman rest client")
+</details>
+
+
+* #### cURL command:
 Below curl command can be used to test the API with different set of country names.
 
 ````
@@ -140,13 +158,19 @@ curl -s --location --request GET 'http://localhost:8080/country-service/countrie
 curl -s --location --request GET 'http://localhost:8080/country-service/countries/Finland'
 ````
 
-* #### Test using swagger UI (OpenAPI):
+* #### Swagger UI (OpenAPI):
  Swagger UI allows visualizing and interact with the API’s exposed by country-service and 
  provides the OpenAPI documentation for the exposed REST APIs.
 
 `http://<host>:<port>/country-service/swagger-ui/index.html`
 
 With country-service running on default 8080 port, Swagger UI can be accessed at http://localhost:8080/country-service/swagger-ui/index.html
+
+<details>
+  <summary>Example : Swagger UI</summary>
+
+![Swagger UI](swagger-openapi.PNG "Swagger UI")
+</details>
 
 ## Application monitoring
 country-service application exposes some actuator endpoints  to monitor the application status. It can be accessed at
