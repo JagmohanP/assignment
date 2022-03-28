@@ -3,6 +3,9 @@ package com.assignment.service;
 import com.assignment.dto.CountryDetails;
 import com.assignment.dto.CountryList;
 
+/**
+ * Interface defining methods to fetch country details.
+ */
 public interface CountryDetailsService {
 
     /**
@@ -14,7 +17,8 @@ public interface CountryDetailsService {
     CountryList getAllCountries();
 
     /**
-     * Get the country details.
+     * Get various country details like name, code, capital, flag and population
+     * for a given country.
      *
      * @param countryName country name
      * @return Country details

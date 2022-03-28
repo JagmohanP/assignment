@@ -9,6 +9,13 @@ import com.assignment.detailsprovider.CountryDetailsProvider;
 import com.assignment.dto.CountryDetails;
 import com.assignment.dto.CountryList;
 
+/**
+ * This class is responsible for fetching the country specific details through
+ * country details providers. Instead of directly interacting with external
+ * servers, it goes via providers to ensure minimum or no disruption when the
+ * providers are changed.
+ *
+ */
 @Service
 public class CountryDetailsServiceImpl implements CountryDetailsService {
 

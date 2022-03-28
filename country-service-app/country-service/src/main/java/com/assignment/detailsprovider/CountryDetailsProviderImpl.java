@@ -19,11 +19,14 @@ import com.assignment.dto.CountryList;
 
 /**
  * Deals with the external country details provider server to fetch the required
- * details. <br>
- * This external server to get country details can be changed any time
- * as it's internal to the service. All such external providers are thus needed
- * to be accessed only via the provided interface.
- *
+ * country details. <br>
+ * Application can choose a different provider in future. So, any such new
+ * providers need to stick to this common interface and ensure, all the required
+ * data is provided to the system.
+ * <br>
+ * This specific provider implementation interacts with
+ * <a href="URL#https://restcountries.com/">https://restcountries.com/</a>
+ * to provide all the country specific details.
  */
 
 @Service
@@ -45,21 +48,26 @@ public class CountryDetailsProviderImpl implements CountryDetailsProvider {
     private String countryDetailsByNameUrl;
 
     /**
-     * Get name and code for all the countries
+     * Get name and code for all the countries.
+     * <br>
+     * Instead of fetching a bulk of
+     * data for each country, the request includes only country name and country
+     * code fields to be returned as part of response. This helps in reducing
+     * the response size and faster processing of the response.
      *
      * @return list of countries having country name and country code
      */
     @Override
     public CountryList getAllCountries() {
 
-        final UriComponents uriComponents = UriComponentsBuilder.fromUriString(allCountriesUrl)
+        final UriComponents uriComponents = UriComponentsBuilder.fromUriString(this.allCountriesUrl)
                 .query("fields={fields}").buildAndExpand("name,cca2");
 
         final String uri = uriComponents.toUriString();
         log.debug("GetAllCountries uri = {}", uri);
 
-        final Country[] allCountries = restTemplate.getForObject(uri, Country[].class);
-        final List<CountryDetails> countriesDetailsList = toCountryDetailsList(allCountries);
+        final Country[] allCountries = this.restTemplate.getForObject(uri, Country[].class);
+        final List<CountryDetails> countriesDetailsList = this.toCountryDetailsList(allCountries);
         final CountryList countryList = new CountryList(countriesDetailsList);
         return countryList;
     }
@@ -79,14 +87,14 @@ public class CountryDetailsProviderImpl implements CountryDetailsProvider {
         //Fetch only needed field to reduce the response size
         urlParams.put("fields", "name,cca2,capital,population,flags");
 
-        final UriComponents uriComponents = UriComponentsBuilder.fromUriString(countryDetailsByNameUrl)
+        final UriComponents uriComponents = UriComponentsBuilder.fromUriString(this.countryDetailsByNameUrl)
                 .query("fields={fields}").buildAndExpand(urlParams);
 
         final String uri = uriComponents.toUriString();
         log.debug("GetDetailsByCountryName uri = {}", uri);
 
-        final Country[] countryDetails = restTemplate.getForObject(uri, Country[].class);
-        return toCountryDetails(countryDetails[0]);
+        final Country[] countryDetails = this.restTemplate.getForObject(uri, Country[].class);
+        return this.toCountryDetails(countryDetails[0]);
     }
 
     private CountryDetails toCountryDetails(final Country country) {
@@ -106,7 +114,7 @@ public class CountryDetailsProviderImpl implements CountryDetailsProvider {
 
         if ((null != countriesArr) && (countriesArr.length > 0)) {
             for (final Country country : countriesArr) {
-                countries.add(toCountryDetails(country));
+                countries.add(this.toCountryDetails(country));
             }
         }
         return countries;

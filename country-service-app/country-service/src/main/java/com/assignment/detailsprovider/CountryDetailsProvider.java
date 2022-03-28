@@ -5,10 +5,10 @@ import com.assignment.dto.CountryList;
 
 /**
  * Deals with the external country details provider server to fetch the required
- * details. <br>
- * This external server to get country details can be changed any time
- * as it's internal to the service. All such external providers are thus needed
- * to be accessed only via the provided interface.
+ * country details. <br>
+ * Application can choose a different provider in future. So, any such new
+ * providers need to stick to this common interface and ensure, all the required
+ * data is provided to the system.
  *
  */
 public interface CountryDetailsProvider {

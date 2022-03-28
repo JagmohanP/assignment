@@ -18,6 +18,9 @@ import com.assignment.dto.CountryDetails;
 import com.assignment.dto.CountryList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Utility class to convert stub data from json files to different POJO types.
+ */
 public class TestUtils {
 
     public static final String ALL_COUNTRIES_JSON = "all-countries.json";
