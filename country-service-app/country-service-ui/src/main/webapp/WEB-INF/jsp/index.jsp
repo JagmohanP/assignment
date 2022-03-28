@@ -26,10 +26,6 @@
 						<select class="form-select" id="countryName" required>
 							<option value="-1" selected="selected" disabled="disabled">
 							------------------- Select country -------------------</option>
-							<c:forEach var="currency" items="${countries}">
-								<option value="${currency.key}">${currency.key}
-									(${currency.value})</option>
-							</c:forEach>
 						</select>
 						<div class="input-group-append px-2">
 							<button class="btn btn-primary btn-sm px-2" type="button"

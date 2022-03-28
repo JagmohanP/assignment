@@ -66,10 +66,8 @@ function getAllCountries() {
 			if (response.ok) {
 				response.json().then(response => {
 					if (response) {
-						//$('#countryName').find('option').remove();
-						//$("#countryName").append('<option value="-1" selected="selected" disabled="disabled">Select country</option>');
 						$.each(response, function(key, value) {
-							$("#countryName").append('<option value="' + key + '">' + key + '(' +value +')</option>');
+							$("#countryName").append('<option value="' + key + '">' + key + ' (' +value +')</option>');
 						});
 					}
 					else {
